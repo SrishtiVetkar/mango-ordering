@@ -3,8 +3,7 @@ from flask_mysqldb import MySQL
 
 app = Flask(__name__)
 
-app.secret_key = 'mango_order_123'  # Add this line (unique random text)
-
+app.secret_key = 'mango_order_123'  
 
 
 # MySQL Configuration
@@ -12,17 +11,17 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'root'
 app.config['MYSQL_DB'] = 'mango_orders'
-app.config['MYSQL_PORT'] = 3307  # Add this line
+app.config['MYSQL_PORT'] = 3307
 
 
 mysql = MySQL(app)
-@app.route('/login', methods=['GET', 'POST'])   # <-- Route बदललं "/login"
+@app.route('/login', methods=['GET', 'POST'])  
 def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         if username == 'farmer' and password == '1234':
-            return redirect(url_for('dashboard'))  # dashboard नंतर define करू
+            return redirect(url_for('dashboard'))  
         else:
             return render_template('login.html', error="Invalid Credentials")
     return render_template('login.html')
